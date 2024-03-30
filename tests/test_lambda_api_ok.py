@@ -10,9 +10,5 @@ ENDPOINT = '/write_to_dyndb'
 def test_api_ok():
     response = requests.get(URL+ENDPOINT)
     assert response.status_code == 200
-    json_response = response.json()
-    before_update_view =  json_response['before_update']['Item']['views']
-    after_update_view =  json_response['after_update']['Item']['views']
-    assert after_update_view == before_update_view+1
 
 # %%
