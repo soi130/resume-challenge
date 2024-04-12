@@ -25,13 +25,3 @@ resource "aws_dynamodb_table" "cloud_resume_challenge_db" {
   }
 }
 
-# resource "aws_dynamodb_table_item" "cloud_resume_challenge_db" {
-#   table_name = aws_dynamodb_table.cloud_resume_challenge_db.name
-#   hash_key   = aws_dynamodb_table.cloud_resume_challenge_db.hash_key
-#   item = <<ITEM
-#   {
-#     "id":{"N":1"}
-#   }
-#   ITEM
-# }
-
