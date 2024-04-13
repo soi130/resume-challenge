@@ -135,7 +135,7 @@ resource "aws_apigatewayv2_stage" "default_api_stage" {
       integrationErrorMessage = "$context.integrationErrorMessage"
       protocol                = "$context.protocol"
       requestId               = "$context.requestId"
-      requestTime             = "$context.identity.requestTime"
+      requestTime             = "$context.requestTime"
       resourcePath            = "$context.resourcePath"
       responseLength          = "$context.responseLength"
       routeKey                = "$context.routeKey"
