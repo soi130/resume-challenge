@@ -132,8 +132,8 @@ resource "aws_apigatewayv2_stage" "default_api_stage" {
     destination_arn = aws_cloudwatch_log_group.api_gateway.arn
     format = jsonencode({
       requestId               = "$context.requestID"
-      sourceIp                = "$context.identity.sourceIp"
       requestTime             = "$context.identity.requestTime"
+      sourceIp                = "$context.identity.sourceIp"
       protocol                = "$context.protocol"
       httpMethod              = "$context.httpMethod"
       resourcePath            = "$context.resourcePath"
@@ -153,7 +153,7 @@ resource "aws_apigatewayv2_integration" "integrated_lambda_function" {
   api_id             = aws_apigatewayv2_api.api_gateway_for_lambda.id
   integration_uri    = aws_lambda_function.terraform_lambda_write_to_dyndb.invoke_arn
   integration_type   = "AWS_PROXY"
-  integration_method = "GET"
+  integration_method = "POST"
 }
 
 #construct API Route
