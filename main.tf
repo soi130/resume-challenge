@@ -25,3 +25,20 @@ resource "aws_dynamodb_table" "cloud_resume_challenge_db" {
   }
 }
 
+resource "aws_dynamodb_table" "test_tf_create" {
+  name           = "test_tf_create"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "id"
+
+  attribute {
+    name = "id"
+    type = "N"
+  }
+
+  tags = {
+    Name = "Cloud Resume Challenge"
+  }
+}
+
