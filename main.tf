@@ -160,7 +160,7 @@ resource "aws_apigatewayv2_integration" "integrated_lambda_function" {
 resource "aws_apigatewayv2_route" "terraform_lambda_api_gw_route" {
   api_id    = aws_apigatewayv2_api.api_gateway_for_lambda.id
   route_key = "ANY /terraform_lambda_write_to_dyndb"
-  target    = "integration/${aws_apigatewayv2_integration.integrated_lambda_function.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.integrated_lambda_function.id}"
 }
 
 # Add permission for gateway to access lambda function
