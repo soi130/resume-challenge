@@ -121,6 +121,7 @@ resource "aws_apigatewayv2_api" "api_gateway_for_lambda" {
     allow_origins = ["https://www.thanak.net"]
     allow_methods = ["GET","OPTIONS"]
   }
+
 }
 
 
@@ -170,7 +171,7 @@ resource "aws_lambda_permission" "api_gateway_permission" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.terraform_lambda_write_to_dyndb.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_apigatewayv2_api.api_gateway_for_lambda.execution_arn}/terraform_lambda_write_to_dyndb"
+  source_arn    = "${aws_apigatewayv2_api.api_gateway_for_lambda.execution_arn}/*/*/terraform_lambda_write_to_dyndb"
 }
 
 
