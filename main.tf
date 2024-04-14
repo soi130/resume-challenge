@@ -127,7 +127,7 @@ resource "aws_apigatewayv2_api" "api_gateway_for_lambda" {
 #set up stage of API Gateway to "Default" with enabling auto-deployment and config access log
 resource "aws_apigatewayv2_stage" "default_api_stage" {
   api_id      = aws_apigatewayv2_api.api_gateway_for_lambda.id
-  name        = "default"
+  name        = "$default"
   auto_deploy = true
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gateway.arn
@@ -161,7 +161,7 @@ resource "aws_apigatewayv2_integration" "integrated_lambda_function" {
 resource "aws_apigatewayv2_route" "terraform_lambda_api_gw_route" {
   api_id    = aws_apigatewayv2_api.api_gateway_for_lambda.id
   route_key = "GET /terraform_lambda_write_to_dyndb"
-  target    = "integrations/${aws_apigatewayv2_integration.integrated_lambda_function.id}"
+  target    = "integrations"
 }
 
 # Add permission for gateway to access lambda function
