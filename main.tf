@@ -71,7 +71,7 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
             "dynamodb:GetItem",
             "dynamodb:PutItem"
           ],
-          "Resource" : "*"
+          "Resource" : aws_dynamodb_table.cloud_resume_challenge_db.arn
         },
       ]
     }

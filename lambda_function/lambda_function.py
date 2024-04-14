@@ -27,8 +27,10 @@ def lambda_handler(event, context):
                     'id':1
                 })    
     
-    return_pack = {'before_update':exist,
-                    'after_update': current_table
+    return_pack = {
+        'statusCode': 200,
+        'before_update':exist,
+        'after_update': current_table
                     }
             
     return return_pack
