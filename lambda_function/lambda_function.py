@@ -28,9 +28,13 @@ def lambda_handler(event, context):
                 })    
     
     return_pack = {
-        'statusCode': 200,
-        'before_update':exist,
-        'after_update': current_table
-                    }
+        "isBase64Encoded": False,
+        "statusCode": 200,
+        "headers": { "Ts": now},
+        "body": {
+            'before_update':exist,
+            'after_update': current_table
+        }
+    }
             
     return return_pack
