@@ -2,7 +2,7 @@ import json
 import boto3
 from datetime import datetime
 
-TABLE_NAME = 'de_job_post'
+TABLE_NAME = 'cloud_resume_challenge_db'
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
 
