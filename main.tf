@@ -52,6 +52,7 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
   policy = jsonencode(
     {
       "Version" : "2012-10-17",
+
       "Statement" : [
         {
           "Effect" : "Allow",
@@ -70,7 +71,7 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
             "dynamodb:GetItem",
             "dynamodb:PutItem"
           ],
-          "Resource" : "arn:aws:dynamodb:us-east-1:861150920151:table/cloud_resume_challenge_db"
+          "Resource" : "*"
         },
       ]
     }
