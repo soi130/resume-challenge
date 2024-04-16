@@ -1,6 +1,14 @@
 import json
 import boto3
 from datetime import datetime
+from decimal import Decimal
+
+#class to convert decimal to string
+class DecimalEncoder(json.JSONEncoder):
+  def default(self, obj):
+    if isinstance(obj, Decimal):
+      return str(obj)
+    return json.JSONEncoder.default(self, obj)
 
 TABLE_NAME = 'cloud_resume_challenge_db'
 dynamodb = boto3.resource('dynamodb')
@@ -30,13 +38,12 @@ def lambda_handler(event, context):
     return_pack = {
         "isBase64Encoded": False,
         "statusCode": 200,
-        "headers": { "Ts": now},
         "body": {
             'before_update':exist,
             'after_update': current_table
         }
     }
 
-    result = json.dumps(return_pack)
+    result = json.dumps(return_pack,cls=DecimalEncoder)
             
     return return_pack
