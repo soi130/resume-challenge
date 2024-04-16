@@ -36,7 +36,7 @@ def lambda_handler(event, context):
                 })    
     
     return_pack = {
-        "isBase64Encoded": False,
+        "isBase64Encoded": True,
         "statusCode": 200,
         "body": {
             'before_update':exist,

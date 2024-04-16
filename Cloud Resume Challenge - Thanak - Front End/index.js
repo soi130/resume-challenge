@@ -2,7 +2,7 @@
 
 // old API = 'https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com/write_to_dyndb'
 // new TF API = 'https://jtq7yd6y81.execute-api.us-east-1.amazonaws.com/terraform_lambda_write_to_dyndb'
-fetch('https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com/write_to_dyndb', {
+fetch('https://jtq7yd6y81.execute-api.us-east-1.amazonaws.com/terraform_lambda_write_to_dyndb', {
         method: 'GET',
 
     })
