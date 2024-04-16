@@ -36,5 +36,7 @@ def lambda_handler(event, context):
             'after_update': current_table
         }
     }
+
+    result = json.dumps(return_pack)
             
     return return_pack

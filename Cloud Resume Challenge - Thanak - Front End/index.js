@@ -1,6 +1,7 @@
 
 
-
+// old API = 'https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com/write_to_dyndb'
+// new TF API = 'https://jtq7yd6y81.execute-api.us-east-1.amazonaws.com/terraform_lambda_write_to_dyndb'
 fetch('https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com/write_to_dyndb', {
         method: 'GET',
 
@@ -16,6 +17,7 @@ fetch('https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com/write_to_dyndb', {
     .then(data => {
         // Handle the data received from the API
         console.log('Data from API:', data);
+        console.log('Data from API >> after_update', data.after_update)
         current_view_count = data.after_update.Item.views;
         // Update the visitorCount element with the received count
         document.getElementById('visitorCount').textContent = current_view_count;
