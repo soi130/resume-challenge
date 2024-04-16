@@ -6,7 +6,7 @@ provider "aws" {
 #import existing DynamoDB to preserve content to the new one TF create
 import {
   to = aws_dynamodb_table.cloud_resume_challenge_db
-  id = "arn:aws:dynamodb:us-east-1:861150920151:table/cloud_resume_challenge_db"
+  id = aws_dynamodb_table.cloud_resume_challenge_db.arn
 }
 
 resource "aws_dynamodb_table" "cloud_resume_challenge_db" {
