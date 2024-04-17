@@ -36,8 +36,8 @@ def lambda_handler(event, context):
                 })    
     
     return_pack = {
-            'before_update':json.dumps(existcls=DecimalEncoder),
-            'after_update': json.dumps(current_tablecls=DecimalEncoder)
+            'before_update':json.dumps(exist, cls=DecimalEncoder),
+            'after_update': json.dumps(current_table, cls=DecimalEncoder)
     }
 
     result = json.dumps(return_pack,cls=DecimalEncoder)
