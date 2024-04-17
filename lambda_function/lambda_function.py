@@ -7,7 +7,7 @@ from decimal import Decimal
 class DecimalEncoder(json.JSONEncoder):
   def default(self, obj):
     if isinstance(obj, Decimal):
-      return str(obj)
+      return float(obj)
     return json.JSONEncoder.default(self, obj)
 
 TABLE_NAME = 'cloud_resume_challenge_db'
@@ -36,10 +36,13 @@ def lambda_handler(event, context):
                 })    
     
     return_pack = {
-            'before_update':json.dumps(exist, cls=DecimalEncoder),
-            'after_update': json.dumps(current_table, cls=DecimalEncoder)
+            'statusCode' : 200,
+            'body': json.dumps({
+              'before_update': exist,
+              'after_update': current_table
+              }, cls=DecimalEncoder)
     }
 
-    result = json.dumps(return_pack,cls=DecimalEncoder)
+    result = json.d (return_pack,cls=DecimalEncoder)
             
     return return_pack
