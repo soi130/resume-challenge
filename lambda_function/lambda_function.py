@@ -43,6 +43,6 @@ def lambda_handler(event, context):
               }, cls=DecimalEncoder)
     }
 
-    result = json.d (return_pack,cls=DecimalEncoder)
+    result = json.dumps(return_pack,cls=DecimalEncoder)
             
     return return_pack
