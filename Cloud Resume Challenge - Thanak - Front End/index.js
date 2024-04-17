@@ -17,7 +17,7 @@ fetch('https://jtq7yd6y81.execute-api.us-east-1.amazonaws.com/terraform_lambda_w
     .then(data => {
         // Handle the data received from the API
         console.log('Data from API:', data);
-        console.log('Data from API >> after_update', data.after_update)
+        console.log('Data from API >> focus test', data.after_update.Item.views)
         current_view_count = data.after_update.Item.views;
         // Update the visitorCount element with the received count
         document.getElementById('visitorCount').textContent = current_view_count;
