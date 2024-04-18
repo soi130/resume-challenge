@@ -29,6 +29,5 @@ crash.log
 # are not checked in
 override.tf
 override.tf.json
-variables.tf
 *_override.tf
 *_override.tf.json
