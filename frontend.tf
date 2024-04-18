@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "cloud_resume_s3_static_host" {
     bucket = "terraform_s3_cloud_resume_bucket"
-    acl = "publick-read"
+    acl = "public-read"
     policy = jsonencode(var.s3_bucket_policy)
 
     cors_rule {
