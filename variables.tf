@@ -22,7 +22,7 @@ variable "s3_bucket_name" {
 
 variable "s3_bucket_policy" {
   description = "S3 public access policy"
-  default = {
+  default = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
       {
@@ -33,5 +33,5 @@ variable "s3_bucket_policy" {
         "Resource" : "arn:aws:s3:::terraform-thanak.net/*"
       }
     ]
-  }
+  })
 }
