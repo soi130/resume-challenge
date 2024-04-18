@@ -1,8 +1,3 @@
-provider "aws" {
-  shared_config_files = [var.tfc_aws_dynamic_credentials.default.shared_config_file]
-  region              = var.region
-}
-
 #import existing DynamoDB to preserve content to the new one TF create
 import {
   to = aws_dynamodb_table.cloud_resume_challenge_db

@@ -1,8 +1,3 @@
-provider "aws" {
-  shared_config_files = [var.tfc_aws_dynamic_credentials.default.shared_config_file]
-  region              = var.region
-}
-
 resource "aws_s3_bucket" "cloud_resume_s3_static_host" {
     bucket = "terraform_s3_cloud_resume_bucket"
     acl = "publick-read"
