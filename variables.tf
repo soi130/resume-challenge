@@ -15,4 +15,23 @@ variable "tfc_aws_dynamic_credentials" {
   })
 }
 
-#test VCS
+variable "s3_bucket_name" {
+  description = "Terraform S3 Name for static web hosting"
+  default = "terraform-thanak.net"
+}
+
+variable "s3_bucket_policy" {
+  description = "S3 public access policy"
+  default = {
+        "Version": "2012-10-17",
+        "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::${bucket}/*"
+        }
+        ]
+    }
+}
