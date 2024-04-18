@@ -6,9 +6,9 @@ resource "aws_s3_bucket" "TerraformThanakcloudResumeS3StaticHost" {
 resource "aws_s3_bucket_public_access_block" "example" {
   bucket = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
 
-  block_public_acls       = true
+  block_public_acls       = false
   block_public_policy     = false
-  ignore_public_acls      = true
+  ignore_public_acls      = false
   restrict_public_buckets = false
 }
 
