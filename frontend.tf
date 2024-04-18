@@ -51,7 +51,7 @@ resource "aws_s3_bucket_cors_configuration" "terraform_cloud_resume_s3_cors" {
 resource "aws_s3_object" "terraform_cloud_resume_s3_object" {
   bucket        = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
   count         = length(var.original_file_paths_for_s3)
-  key           = "${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}"
+  key           = "${basename(var.original_file_paths_for_s3[count.index])}"
   source        = var.original_file_paths_for_s3[count.index]
   etag          = filemd5("${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}")
 }
