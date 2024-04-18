@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "TerraformThanakcloudResumeS3StaticHost" {
-  bucket = "terraform_s3_cloud_resume_bucket"
+  bucket = "terraform-thanak.net"
 
 }
 
