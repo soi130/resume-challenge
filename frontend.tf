@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "cloud-resume-s3-static-host" {
+resource "aws_s3_bucket" "TerraformThanakcloudResumeS3StaticHost" {
   bucket = "terraform_s3_cloud_resume_bucket"
 
 }
