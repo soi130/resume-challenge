@@ -53,6 +53,7 @@ resource "aws_s3_object" "terraform_cloud_resume_s3_object" {
   count         = length(var.original_file_paths_for_s3)
   key           = "${basename(var.original_file_paths_for_s3[count.index])}"
   source        = var.original_file_paths_for_s3[count.index]
+  content_type = "text/html"
   etag          = filemd5("${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}")
 }
 
