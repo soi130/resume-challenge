@@ -113,10 +113,10 @@ resource "aws_apigatewayv2_api" "api_gateway_for_lambda" {
   name          = "terraform_visitor_count_api_gateway"
   protocol_type = "HTTP"
   description   = "terraform API Gateway to trigger Lambda function to update visitor count"
-  # cors_configuration {
-  #   allow_origins = ["https://www.thanak.net"]
-  #   allow_methods = ["GET","OPTIONS"]
-  # }
+  cors_configuration {
+    allow_origins = ["https://www.thanak.net", "http://terraform-thanak.net.s3-website-us-east-1.amazonaws.com"]
+    allow_methods = ["GET","OPTIONS"]
+  }
 
 }
 
