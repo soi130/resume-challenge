@@ -153,6 +153,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.ssl_cert
+    acm_certificate_arn = aws_acm_certificate.ssl_cert.arn
   }
 }
