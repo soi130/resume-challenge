@@ -14,7 +14,7 @@ resource "aws_s3_bucket_public_access_block" "example" {
 
 resource "aws_s3_bucket_policy" "terraform_cloud_resume_s3_policy_config" {
   bucket = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
-  policy = var.s3_bucket_policy
+  policy = jsonencode(var.s3_bucket_policy)
 }
 
 resource "aws_s3_bucket_website_configuration" "terraform_cloud_resume_s3_website_config" {
