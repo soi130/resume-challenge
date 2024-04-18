@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "TerraformThanakcloudResumeS3StaticHost" {
   bucket = "terraform-thanak.net"
-
 }
 
 resource "aws_s3_bucket_public_access_block" "example" {
@@ -22,7 +21,6 @@ resource "aws_s3_bucket_website_configuration" "terraform_cloud_resume_s3_websit
   index_document {
     suffix = "index.html"
   }
-
 }
 
 resource "aws_s3_bucket_versioning" "terraform_cloud_resume_s3_versioning_config" {
@@ -30,7 +28,6 @@ resource "aws_s3_bucket_versioning" "terraform_cloud_resume_s3_versioning_config
   versioning_configuration {
     status = "Enabled"
   }
-
 }
 
 resource "aws_s3_bucket_ownership_controls" "terraform_cloud_resume_s3_ownership_control" {
@@ -40,7 +37,7 @@ resource "aws_s3_bucket_ownership_controls" "terraform_cloud_resume_s3_ownership
   }
 }
 
-resource "aws_s3_bucket_cors_configuration" "tf_cloud_resume_s3_cors" {
+resource "aws_s3_bucket_cors_configuration" "terraform_cloud_resume_s3_cors" {
   bucket = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
   cors_rule {
     allowed_headers = ["Authorization", "Content-Length"]
@@ -48,7 +45,15 @@ resource "aws_s3_bucket_cors_configuration" "tf_cloud_resume_s3_cors" {
     allowed_origins = ["*"]
     max_age_seconds = 10
   }
-
-
 }
+
+#iterate over multiple files with count 
+resource "aws_s3_object" "terraform_cloud_resume_s3_object" {
+  bucket        = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
+  count         = length(var.original_file_paths_for_s3)
+  key           = "${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}"
+  source        = var.original_file_paths_for_s3[count.index]
+  etag          = filemd5("${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}")
+}
+
   

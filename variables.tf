@@ -35,3 +35,11 @@ variable "s3_bucket_policy" {
     ]
   }
 }
+
+variable "original_file_paths_for_s3" {
+  default = [
+    "${path.module}/Cloud Resume Challenge - Thanak - Front End/index.html",
+    "${path.module}/Cloud Resume Challenge - Thanak - Front End/index.js",
+    "${path.module}/Cloud Resume Challenge - Thanak - Front End/resume.css"
+  ]
+}
