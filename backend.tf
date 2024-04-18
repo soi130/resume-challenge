@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "cloud_resume_challenge_db" {
   }
 
   tags = {
-    Name = "Cloud Resume Challenge"
+    Name = var.project_tag
   }
 }
 
@@ -38,6 +38,9 @@ resource "aws_iam_role" "lambda_role" {
       ]
     }
   )
+  tags = {
+    Name = var.project_tag
+  }
 }
 
 resource "aws_iam_policy" "iam_policy_for_lambda" {
@@ -71,6 +74,9 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
       ]
     }
   )
+  tags = {
+    Name = var.project_tag
+  }
 }
 
 ## attach policy to newly created role
@@ -100,6 +106,9 @@ resource "aws_lambda_function" "terraform_lambda_write_to_dyndb" {
       databaseName = aws_dynamodb_table.cloud_resume_challenge_db.name
     }
   }
+  tags = {
+    Name = var.project_tag
+  }
 }
 
 #create Cloudwatch Log group and API Gateway
@@ -115,7 +124,10 @@ resource "aws_apigatewayv2_api" "api_gateway_for_lambda" {
   description   = "terraform API Gateway to trigger Lambda function to update visitor count"
   cors_configuration {
     allow_origins = ["https://www.thanak.net", "http://terraform-thanak.net.s3-website-us-east-1.amazonaws.com"]
-    allow_methods = ["GET","OPTIONS"]
+    allow_methods = ["GET", "OPTIONS"]
+  }
+  tags = {
+    Name = var.project_tag
   }
 
 }
@@ -142,7 +154,7 @@ resource "aws_apigatewayv2_stage" "default_api_stage" {
     })
   }
   tags = {
-    Name = "Cloud Resume Challenge"
+    Name = var.project_tag
   }
 }
 
@@ -152,6 +164,7 @@ resource "aws_apigatewayv2_integration" "integrated_lambda_function" {
   integration_uri    = aws_lambda_function.terraform_lambda_write_to_dyndb.invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
+  
 }
 
 #construct API Route
@@ -159,6 +172,7 @@ resource "aws_apigatewayv2_route" "terraform_lambda_api_gw_route" {
   api_id    = aws_apigatewayv2_api.api_gateway_for_lambda.id
   route_key = "GET /terraform_lambda_write_to_dyndb"
   target    = "integrations/${aws_apigatewayv2_integration.integrated_lambda_function.id}"
+  
 }
 
 # Add permission for gateway to access lambda function
