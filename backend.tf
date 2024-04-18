@@ -88,13 +88,13 @@ data "archive_file" "zip_python_code" {
 
 #construct the actual lambda function
 resource "aws_lambda_function" "terraform_lambda_write_to_dyndb" {
-  filename      = data.archive_file.zip_python_code.output_path
-  function_name = "terraform_lambda_write_to_dyndb"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.lambda_handler"
-  source_code_hash = data.archive_file.zip_python_code.output_base64sha256  
-  runtime       = "python3.8"
-  depends_on    = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
+  filename         = data.archive_file.zip_python_code.output_path
+  function_name    = "terraform_lambda_write_to_dyndb"
+  role             = aws_iam_role.lambda_role.arn
+  handler          = "lambda_function.lambda_handler"
+  source_code_hash = data.archive_file.zip_python_code.output_base64sha256
+  runtime          = "python3.8"
+  depends_on       = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
   environment {
     variables = {
       databaseName = aws_dynamodb_table.cloud_resume_challenge_db.name
@@ -138,7 +138,7 @@ resource "aws_apigatewayv2_stage" "default_api_stage" {
       responseLength          = "$context.responseLength"
       routeKey                = "$context.routeKey"
       sourceIp                = "$context.identity.sourceIp"
-      status                  = "$context.status" 
+      status                  = "$context.status"
     })
   }
   tags = {
