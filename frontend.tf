@@ -79,12 +79,6 @@ resource "aws_acm_certificate" "ssl_cert" {
   }
 }
 
-# Create CloudFront Distribution attached to an S3 static web host
-
-# data "aws_cloudfront_cache_policy" "terraform_cf_cache_policy" {
-#   name = "Managed-CachingOptimized"
-# }
-
 resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.bucket_regional_domain_name
@@ -174,6 +168,15 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
     ssl_support_method = "sni-only"
     
   }
+}
+
+# Invalidate CloudFront Cache
+resource "aws_cloudfront_distribution_invalidations" "example_invalidation" {
+  distribution_id = aws_cloudfront_distribution.terraform_s3_distribution.id
+  # Specify the paths to invalidate
+  paths = ["/*"]
+  # invalidate every time the Terraform plan is applied
+  depends_on = [aws_cloudfront_distribution.example_distribution]
 }
 
 #considering import existing certificate
