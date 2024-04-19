@@ -102,7 +102,7 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
-    cache_policy_id  = aws_cloudfront_cache_policy.terraform_cf_cache_policy.id
+    cache_policy_id  = data.aws_cloudfront_cache_policy.terraform_cf_cache_policy.id
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0 
     default_ttl            = 3600 #how long (in seconds) the data stays in CloudFront Cache
