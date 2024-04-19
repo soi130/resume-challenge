@@ -96,7 +96,7 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
   comment             = "Comment - Create With Terraform for Cloud Resume Challenge"
   default_root_object = "index.html"
 
-  aliases = ["www.thanak.net"]
+  aliases = ["www.thanak.net/terraform"]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
