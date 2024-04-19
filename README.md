@@ -2,6 +2,8 @@
 
 This repository is my journey through the Cloud Resume Challenge, where I embarked on an exciting adventure to build a modern, cloud-native resume website. Leveraging the power of AWS, GitHub Actions, and Terraform, I gained invaluable experience in deploying scalable infrastructure and implementing robust DevOps practices. For the original challenge website, please visit: https://cloudresumechallenge.dev
 
+![screenshot](diagram.png)
+
 ## Overview 🔍
 
 The Cloud Resume Challenge is a hands-on project that challenged me to build a resume website and seamlessly deployed on AWS using various cloud services. The project challenge you to set up a comprehensive CI/CD pipeline for efficient and automated deployments, ensuring a smooth and streamlined development process.
