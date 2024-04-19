@@ -156,3 +156,5 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     acm_certificate_arn = aws_acm_certificate.ssl_cert.arn
   }
 }
+
+#considering import existing certificate
