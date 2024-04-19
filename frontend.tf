@@ -171,12 +171,12 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
 }
 
 # Invalidate CloudFront Cache
-resource "aws_cloudfront_distribution_invalidations" "example_invalidation" {
+resource "aws_cloudfront_distribution_invalidations" "terraform_s3_distribution_invalidation" {
   distribution_id = aws_cloudfront_distribution.terraform_s3_distribution.id
   # Specify the paths to invalidate
   paths = ["/*"]
   # invalidate every time the Terraform plan is applied
-  depends_on = [aws_cloudfront_distribution.example_distribution]
+  depends_on = [aws_cloudfront_distribution.terraform_s3_distribution]
 }
 
 #considering import existing certificate
