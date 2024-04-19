@@ -171,7 +171,7 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
 }
 
 #Invalidate CloudFront Cache
-resource "null_resource" "terraform_s3_distribution_invalidation_for_index.html" {
+resource "null_resource" "terraform_s3_distribution_invalidation_for_index_html" {
   provisioner "local-exec" {
     command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.terraform_s3_distribution.id} --paths '/index.html'"
   }
@@ -181,7 +181,7 @@ resource "null_resource" "terraform_s3_distribution_invalidation_for_index.html"
 }
 
 #Invalidate CloudFront Cache
-resource "null_resource" "terraform_s3_distribution_invalidation_for_index.js" {
+resource "null_resource" "terraform_s3_distribution_invalidation_for_index_js" {
   provisioner "local-exec" {
     command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.terraform_s3_distribution.id} --paths '/index.js'"
   }
@@ -191,7 +191,7 @@ resource "null_resource" "terraform_s3_distribution_invalidation_for_index.js" {
 }
 
 #Invalidate CloudFront Cache
-resource "null_resource" "terraform_s3_distribution_invalidation_for_resume.css" {
+resource "null_resource" "terraform_s3_distribution_invalidation_for_resume_css" {
   provisioner "local-exec" {
     command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.terraform_s3_distribution.id} --paths '/resume.css'"
   }
