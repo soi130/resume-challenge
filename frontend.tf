@@ -56,12 +56,12 @@ resource "aws_s3_bucket_cors_configuration" "terraform_cloud_resume_s3_cors" {
 
 #iterate over multiple files with count 
 resource "aws_s3_object" "terraform_cloud_resume_s3_object" {
-  bucket        = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
-  count         = length(var.original_file_paths_for_s3)
-  key           = "${basename(var.original_file_paths_for_s3[count.index])}"
-  source        = var.original_file_paths_for_s3[count.index]
+  bucket       = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
+  count        = length(var.original_file_paths_for_s3)
+  key          = basename(var.original_file_paths_for_s3[count.index])
+  source       = var.original_file_paths_for_s3[count.index]
   content_type = "text/html"
-  etag          = filemd5("${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}")
+  etag         = filemd5("${path.module}/Cloud Resume Challenge - Thanak - Front End/${basename(var.original_file_paths_for_s3[count.index])}")
 }
 
 #=================
@@ -81,8 +81,8 @@ resource "aws_acm_certificate" "ssl_cert" {
 
 resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.bucket_regional_domain_name
-    origin_id                = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
+    domain_name = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
   }
 
   enabled             = true
@@ -105,7 +105,7 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
       }
     }
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0 
+    min_ttl                = 0
     default_ttl            = 3600 #how long (in seconds) the data stays in CloudFront Cache
     max_ttl                = 86400
   }
@@ -136,7 +136,7 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = aws_s3_bucket.TerraformThanakcloudResumeS3StaticHost.id
-    
+
     forwarded_values {
       query_string = false
 
@@ -165,17 +165,17 @@ resource "aws_cloudfront_distribution" "terraform_s3_distribution" {
 
   viewer_certificate {
     acm_certificate_arn = aws_acm_certificate.ssl_cert.arn
-    ssl_support_method = "sni-only"
-    
+    ssl_support_method  = "sni-only"
+
   }
 }
 
-# Invalidate CloudFront Cache
+#Invalidate CloudFront Cache
 resource "null_resource" "terraform_s3_distribution_invalidation" {
   provisioner "local-exec" {
-    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.terraform_s3_distribution.id} -paths '/*'"
+    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.terraform_s3_distribution.id} --paths '/*'"
   }
   triggers = {
-    website_version_change = aws_s3_object.terraform_cloud_resume_s3_object.version_id
+    website_version_changed = aws_s3_object.terraform_cloud_resume_s3_object[0].version_id
   }
 }
