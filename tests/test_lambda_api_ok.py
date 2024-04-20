@@ -1,9 +1,8 @@
 #%%
 import requests
-import pytest
 
-URL = "https://qhq9zgl0nh.execute-api.us-east-1.amazonaws.com"
-ENDPOINT = '/write_to_dyndb'
+URL = "https://jtq7yd6y81.execute-api.us-east-1.amazonaws.com"
+ENDPOINT = '/terraform_lambda_write_to_dyndb'
 
 #%%
 
